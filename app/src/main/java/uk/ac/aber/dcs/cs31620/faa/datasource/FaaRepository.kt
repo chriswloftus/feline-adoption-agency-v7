@@ -38,6 +38,18 @@ class FaaRepository(application: Application) {
         gender: Gender
     ) = catDao.getCatsByGender(gender)
 
+    fun getCatsBornBetweenDates(startDate: LocalDateTime, endDate: LocalDateTime)=
+        catDao.getCatsBornBetweenDates(startDate, endDate)
+
+    fun getCatsByBreedAndGender(breed: String, gender: String)=
+        catDao.getCatsByBreedAndGender(breed, gender)
+
+    fun getCatsByBreedAndBornBetweenDates(breed: String, startDate: LocalDateTime, endDate: LocalDateTime)=
+        catDao.getCatsByBreedAndBornBetweenDates(breed, startDate, endDate)
+
+    fun getCatsByGenderAndBornBetweenDates(gender: Gender, startDate: LocalDateTime, endDate: LocalDateTime)=
+        catDao.getCatsByGenderAndBornBetweenDates(gender, startDate, endDate)
+
     fun getRecentCatsSync(startDate: LocalDateTime, endDate: LocalDateTime)=
         catDao.getCatsAdmittedBetweenDatesSync(startDate, endDate)
 }

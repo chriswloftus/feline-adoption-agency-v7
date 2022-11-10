@@ -60,4 +60,34 @@ interface CatDao {
     fun getCatsByGender(
         gender: Gender
     ): LiveData<List<Cat>>
+
+    @Query("SELECT * FROM cats WHERE dob BETWEEN :startDate AND :endDate")
+    fun getCatsBornBetweenDates(
+        startDate: LocalDateTime,
+        endDate: LocalDateTime
+    ): LiveData<List<Cat>>
+
+    @Query("SELECT * FROM cats WHERE breed = :breed AND gender = :gender")
+    fun getCatsByBreedAndGender(breed: String, gender: String): LiveData<List<Cat>>
+
+    @Query(
+        """SELECT * FROM cats WHERE breed = :breed 
+              AND dob BETWEEN :startDate AND :endDate"""
+    )
+    fun getCatsByBreedAndBornBetweenDates(
+        breed: String,
+        startDate: LocalDateTime,
+        endDate: LocalDateTime
+    ): LiveData<List<Cat>>
+
+    @Query(
+        """SELECT * FROM cats WHERE gender = :gender 
+              AND dob BETWEEN :startDate AND :endDate"""
+    )
+    fun getCatsByGenderAndBornBetweenDates(
+        gender: Gender,
+        startDate: LocalDateTime,
+        endDate: LocalDateTime
+    ): LiveData<List<Cat>>
+
 }
