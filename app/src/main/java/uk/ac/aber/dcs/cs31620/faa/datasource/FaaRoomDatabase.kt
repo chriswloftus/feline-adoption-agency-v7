@@ -25,26 +25,25 @@ abstract class FaaRoomDatabase : RoomDatabase() {
         private var instance: FaaRoomDatabase? = null
         private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
+        @Synchronized
         fun getDatabase(context: Context): FaaRoomDatabase? {
-            synchronized(this) {
-                if (instance == null) {
-                    instance =
-                        Room.databaseBuilder<FaaRoomDatabase>(
-                            context.applicationContext,
-                            FaaRoomDatabase::class.java,
-                            "faa_database"
-                        )
-                            .allowMainThreadQueries()
-                            .addCallback(roomDatabaseCallback(context))
-                            //.addMigrations(MIGRATION_1_2, MIGRATION_2_3
-                            .build()
-                } // if
-                return instance!!
-            }
+            if (instance == null) {
+                instance =
+                    Room.databaseBuilder<FaaRoomDatabase>(
+                        context.applicationContext,
+                        FaaRoomDatabase::class.java,
+                        "faa_database"
+                    )
+                        .allowMainThreadQueries()
+                        .addCallback(roomDatabaseCallback(context))
+                        //.addMigrations(MIGRATION_1_2, MIGRATION_2_3
+                        .build()
+            } // if
+            return instance
         }
 
         private fun roomDatabaseCallback(context: Context): Callback {
-            return object: Callback() {
+            return object : Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
 
@@ -55,7 +54,7 @@ abstract class FaaRoomDatabase : RoomDatabase() {
             }
         }
 
-        private suspend fun populateDatabase(context: Context, instance: FaaRoomDatabase){
+        private suspend fun populateDatabase(context: Context, instance: FaaRoomDatabase) {
             val upToOneYear = LocalDateTime.now().minusDays(365 / 2)
             val from1to2Years = LocalDateTime.now().minusDays(365 + (36 / 2))
             val from2to5Years = LocalDateTime.now().minusDays(365 * 3)
@@ -64,7 +63,7 @@ abstract class FaaRoomDatabase : RoomDatabase() {
             val veryRecentAdmission = LocalDateTime.now()
 
             val upToOneYearCat = Cat(
-                0,  "Tibs",  Gender.MALE,
+                0, "Tibs", Gender.MALE,
                 "Moggie",
                 "Lorem ipsum dolor...",
                 upToOneYear,
