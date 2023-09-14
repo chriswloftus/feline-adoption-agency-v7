@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uk.ac.aber.dcs.cs31620.faa.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchArea(
     modifier: Modifier = Modifier,
