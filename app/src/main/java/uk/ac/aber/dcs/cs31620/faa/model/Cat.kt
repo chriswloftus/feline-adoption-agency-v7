@@ -4,7 +4,6 @@
  */
 package uk.ac.aber.dcs.cs31620.faa.model
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -15,7 +14,6 @@ import java.time.temporal.ChronoUnit
 @Entity(tableName = "cats")
 data class Cat(
     @PrimaryKey(autoGenerate = true)
-    @NonNull
     var id: Int = 0,
     var name: String,
     var gender: Gender = Gender.FEMALE,
