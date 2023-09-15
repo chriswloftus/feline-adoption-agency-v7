@@ -91,10 +91,4 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.5.2'
     implementation 'androidx.room:room-ktx:2.5.2'
     kapt 'androidx.room:room-compiler:2.5.2'
-
-    // LiveData
-    implementation 'androidx.compose.runtime:runtime-livedata'
-
-    // ViewModels
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose'
 }
